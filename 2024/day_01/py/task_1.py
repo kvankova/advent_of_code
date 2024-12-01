@@ -21,7 +21,7 @@ def calculate_difference_sum(left_series, right_series):
     return sum(abs(left - right) for left, right in zip(left_series, right_series))
 
 def main():
-    data = read_input_file("input.txt")
+    data = read_input_file("../input.txt")
     left_series, right_series = parse_number_series(data)
     result = calculate_difference_sum(left_series, right_series)
     print(result)
