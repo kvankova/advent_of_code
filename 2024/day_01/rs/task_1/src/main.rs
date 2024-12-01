@@ -1,5 +1,5 @@
 fn main() {
-    let data: String = std::fs::read_to_string("../input.txt").unwrap();
+    let data: String = std::fs::read_to_string("../../input.txt").unwrap();
     
     let chunks: Vec<&str> = data.split("\n").collect();
     let mut left_series: Vec<i32> = Vec::new();
