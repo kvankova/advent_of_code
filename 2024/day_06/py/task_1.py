@@ -64,6 +64,7 @@ board = Board(
 def move_guard(board: Board) -> Board:
     global visited_positions
     # crate in the way
+    
     if (
         board.guard.position[0] + board.guard.direction[0], 
         board.guard.position[1] + board.guard.direction[1]
@@ -82,6 +83,7 @@ def move_guard(board: Board) -> Board:
         board.end = True
     # move guard
     else:
+        
         board.guard.position = (
             board.guard.position[0] + board.guard.direction[0], 
             board.guard.position[1] + board.guard.direction[1]
@@ -91,7 +93,8 @@ def move_guard(board: Board) -> Board:
     return board
 
 while not board.end:
+    visited_positions.add(board.guard.position)
     board = move_guard(board)
-    # print_board(board)
+    
 
 print(len(visited_positions))
