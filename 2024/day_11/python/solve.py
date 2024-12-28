@@ -13,14 +13,21 @@ def process_number(number: int) -> list[int]:
         return [int(str(number)[:len(str(number)) // 2]), int(str(number)[len(str(number)) // 2:])]
     else:
         return [number * 2024]
+    
+def process_memory(memory: dict[int, int]) -> dict[int, int]:
+    tmp = {}
+    for number, count in memory.items():
+        processed_numbers = process_number(number)
+        for processed_number in processed_numbers:
+            tmp[processed_number] = tmp.get(processed_number, 0) + count
+    return tmp
 
-def process_line(line: list[int]) -> list[int]:
-    result = []
-    for number in line:
-        result.extend(process_number(number))
-    return result
+def calculate_result(iterations: int) -> int:
+    memory = {i: 1 for i in puzzle}
+    
+    for _ in range(iterations):
+        memory = process_memory(memory)
+    
+    return sum(memory.values())
 
-for _ in range(25):
-    puzzle = process_line(puzzle)
-
-print(len(puzzle))
+print(calculate_result(75))
