@@ -8,6 +8,7 @@ def read_input_file(filename):
 
 puzzle = np.array(read_input_file(Path(__file__).parents[1] / "input.txt").split("\n")[:-1])
 
+# get the locations of each letter
 letter_locations = {}
 for row_index, row in enumerate(puzzle):
     for letter_index, letter in enumerate(row):
@@ -22,6 +23,7 @@ def is_adjacent(location1, locations):
             return True
     return False
 
+# get the regions
 regions = {}
 for letter, locations in letter_locations.items():
     for location in locations:
@@ -34,11 +36,14 @@ for letter, locations in letter_locations.items():
             new_region_name = letter + str(location[0]) + str(location[1])
             regions[new_region_name] = [location]
 
+# get the adjacent locations of a location
 def get_adjacent_locations(location):
-    adjacent_locations = []
-    for row_index, col_index in [(location[0] - 1, location[1]), (location[0] + 1, location[1]), (location[0], location[1] - 1), (location[0], location[1] + 1)]:
-        adjacent_locations.append((row_index, col_index))
-    return adjacent_locations
+    return [
+        (location[0] - 1, location[1]), 
+        (location[0] + 1, location[1]), 
+        (location[0], location[1] - 1), 
+        (location[0], location[1] + 1)
+        ]
 
 # merge regions if they are adjacent
 def merge_adjacent_regions(regions):
