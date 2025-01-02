@@ -2,19 +2,6 @@ def read_input_file(filename):
     with open(filename, "r") as file:
         return file.read()
 
-def sum_odd_element(diffs, odd_element):
-    modified_diffs = []
-    skip_index = -1
-    for idx, diff in enumerate(diffs):
-        if skip_index == idx:
-            continue
-        elif diff == odd_element:
-            modified_diffs.append(diff + diffs[idx + 1])
-            skip_index = idx + 1 
-        else:
-            modified_diffs.append(diff)
-    return modified_diffs
-
 def condition_met(diffs, min_diff = 1, max_diff = 3):
     return (
         all(diff >= min_diff and diff <= max_diff for diff in diffs) or 
@@ -47,7 +34,4 @@ if __name__ == "__main__":
     data = read_input_file("./input.txt")
     lines = data.split("\n")
     safe_sequences = [line for line in lines if check_sequence(line)]
-    unsafe_sequences = [line for line in lines if not check_sequence(line)]
-    for i, line in enumerate(unsafe_sequences):
-        print(line)
     print(len(safe_sequences))
